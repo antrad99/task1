@@ -1,0 +1,40 @@
+﻿@page "/book-search"
+<div class="pageTile">Book Search</div>
+    <div class="pageLabel">Search:</div>
+    <div class="pageBody">
+
+        <input @oninput="search_OnChange"
+            @bind="inputSearch"
+            style="margin-bottom:10px;width:200px;margin-right: 5px;height:35px"
+            class="TextBox"
+            type="text">
+
+
+        <button class="pageButton" @onclick="search" disabled="@(!hasSearchInput)">Search</button>
+        <button style="margin-left: 5px;" class="pageButton" @onclick="addBook">Add Book</button>
+    </div>
+    @if (ShowError)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@Error</p>
+        </div>
+    }
+    @if (Loading)
+    {
+        <div class="loader"></div>
+    }
+    @if (NoResults)
+    {
+        <p>No book(s) found.</p>
+    }
+    @if (DisplayResults)
+    {
+        @foreach (var book in books)
+        {
+            <div class="component-table-row">
+            <a id="edit" style="cursor:pointer;" @onclick="(e => editBook(book.Id))">@book.Id</a> - 
+            <b style="margin-right: 3px;">Author:</b>@book.Author ; <b>Title:</b>@book.Title ; <b>ISBN:</b>@book.ISBN ; <b>Status:</b> @book.Availabity
+            
+            </div>
+        }
+    }

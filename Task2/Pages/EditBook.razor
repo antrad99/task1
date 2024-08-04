@@ -1,0 +1,65 @@
+﻿@page "/edit-book/{id}"
+@if (IsNew)
+{
+    <div class="pageTile">
+        Add Book
+    </div>
+}
+else
+{
+    <div class="pageTile">
+        Update Book
+    </div>
+}
+@if (ShowMessage)
+{
+    <div class="alert alert-success" role="alert">
+        <p>@Message</p>
+    </div>
+}
+@if (ShowError)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@Error</p>
+    </div>
+}
+@if (Loading)
+{
+    <div class="loader-block">
+        <div class="loader"></div>
+    </div>
+}
+else
+{
+    <div>
+        <label class="pageLabel">Author:</label>
+    </div>
+    <div>
+        <input class="@((ShowErrorAuthor) ? "TextBox TextBoxInvalid": "TextBox")" @bind="bookDto.Author" @oninput="onInput_Author" type="text">
+    </div>
+    <div>
+        <label class="pageLabel">Title:</label>
+    </div>
+    <div>
+        <input class="@((ShowErrorTitle) ? "TextBox TextBoxInvalid": "TextBox")" @bind="bookDto.Title" @oninput="onInput_Title" type="text">
+    </div>
+    <div>
+        <label class="pageLabel">ISBN:</label>
+    </div>
+    <div>
+        <input class="@((ShowErrorISBN) ? "TextBox TextBoxInvalid": "TextBox")" @bind="bookDto.ISBN" @oninput="onInput_ISBN" type="text">
+    </div>
+    <div style="margin-top:20px;">
+        @if (IsNew)
+        {
+            <button class="pageButton" @onclick="onAddBook">Add Book</button>
+        }
+        else
+        {
+            <button class="pageButton" @onclick="onUpdateBook">Update Book</button>
+        }
+    </div>
+}
+
+
+
