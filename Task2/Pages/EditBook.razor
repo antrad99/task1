@@ -49,6 +49,18 @@ else
     <div>
         <input class="@((ShowErrorISBN) ? "TextBox TextBoxInvalid": "TextBox")" @bind="bookDto.ISBN" @oninput="onInput_ISBN" type="text">
     </div>
+    <div>
+        <label class="pageLabel">Status:</label>
+    </div>
+    <div>
+        <input type="radio" checked="@(bookDto.Availabity == Enums.BookStatus.Available)"
+               name="Staus" @onchange="@(() => bookDto.Availabity = Enums.BookStatus.Available)" />
+        <label>Available</label>
+
+        <input type="radio" checked="@(bookDto.Availabity == Enums.BookStatus.Borrowed)"
+               name="Status" @onchange="@(() => bookDto.Availabity = Enums.BookStatus.Borrowed)" />
+        <label>Borrowed</label>
+    </div>
     <div style="margin-top:20px;">
         @if (IsNew)
         {
